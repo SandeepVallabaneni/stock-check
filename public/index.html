@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlphaPulse India | NSE & BSE Stock Analytics & Technical Terminal</title>
-  <meta name="description" content="Institutional Indian Stock Analytics Terminal featuring NSE/BSE stocks, 6-month historical data, Wilder's RSI, Moving Averages, and AG-Grid data table.">
-  
+  <meta name="description"
+    content="Institutional Indian Stock Analytics Terminal featuring NSE/BSE stocks, 6-month historical data, Wilder's RSI, Moving Averages, and AG-Grid data table.">
+
   <!-- Professional Typography (Roboto & JetBrains Mono - Viachain / Whereismycontainer style) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- AG-Grid Community Stylesheets (Light Theme Quartz) -->
-  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-grid.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css';">
-  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-theme-quartz.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css';">
-  
+  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-grid.min.css"
+    onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css';">
+  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-theme-quartz.min.css"
+    onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css';">
+
   <!-- Core Design System CSS (Professional Light Theme) -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
   <!-- Ambient Light Orbs -->
@@ -60,14 +67,8 @@
             <label class="form-label" for="login-username">Username or Corporate Email</label>
             <div class="input-with-icon">
               <span class="input-icon">👤</span>
-              <input 
-                type="text" 
-                id="login-username" 
-                class="form-input" 
-                placeholder="sandeep or sandeep@alphapulse.io" 
-                required 
-                autocomplete="username"
-              >
+              <input type="text" id="login-username" class="form-input" placeholder="sandeep or sandeep@alphapulse.io"
+                required autocomplete="username">
             </div>
           </div>
 
@@ -75,15 +76,10 @@
             <label class="form-label" for="login-password">Password</label>
             <div class="input-with-icon">
               <span class="input-icon">🔒</span>
-              <input 
-                type="password" 
-                id="login-password" 
-                class="form-input" 
-                placeholder="••••••••••••" 
-                required 
-                autocomplete="current-password"
-              >
-              <button type="button" id="toggle-login-pwd-btn" class="toggle-password-btn" aria-label="Toggle password visibility">
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required
+                autocomplete="current-password">
+              <button type="button" id="toggle-login-pwd-btn" class="toggle-password-btn"
+                aria-label="Toggle password visibility">
                 👁️
               </button>
             </div>
@@ -165,7 +161,7 @@
         <div class="nav-left">
           <a href="#" class="logo-brand">
             <div class="logo-icon">▲</div>
-            <span class="logo-text">AlphaPulse India</span>
+            <span class="logo-text">Sandeep</span>
           </a>
           <div class="market-status-pill">
             <span class="market-pulse-dot"></span>
@@ -176,7 +172,9 @@
         <div class="nav-right">
           <!-- User Profile & Logout -->
           <div class="user-profile-badge">
-            <img id="nav-user-avatar" class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User avatar">
+            <img id="nav-user-avatar" class="user-avatar"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+              alt="User avatar">
             <div class="user-details">
               <span id="nav-user-name" class="user-name">Sandeep Vallabaneni</span>
               <span id="nav-user-role" class="user-role">Senior Equity Analyst</span>
@@ -191,7 +189,7 @@
 
     <!-- Main Dashboard Container -->
     <div class="dashboard-main">
-      
+
       <!-- =======================================================================
            FEATURE 3.1: SEARCH PANEL ON THE TOP WITH SEARCH BUTTON
            ======================================================================= -->
@@ -199,16 +197,11 @@
         <form id="stock-search-form" class="search-form-row">
           <div class="search-input-box">
             <span class="search-icon">🔍</span>
-            <input 
-              type="text" 
-              id="stock-search-input" 
-              placeholder="Search Indian stocks (enter at least 3 letters e.g. JYO, CAN, JAY, SAN, HUD, PCJ, BOD)..." 
-              autocomplete="off"
-              spellcheck="false"
-              value="JYOTISTRUC"
-            >
+            <input type="text" id="stock-search-input"
+              placeholder="Search Indian stocks (enter at least 3 letters e.g. JYO, CAN, JAY, SAN, HUD, PCJ, BOD)..."
+              autocomplete="off" spellcheck="false" value="JYOTISTRUC">
             <button type="button" id="clear-search-btn" class="clear-search-btn" title="Clear input">✕</button>
-            
+
             <!-- Autocomplete Suggestion Dropdown -->
             <div id="search-autocomplete-list" class="search-autocomplete-dropdown"></div>
           </div>
@@ -243,7 +236,8 @@
             <span id="stock-signal-badge" class="cell-signal-badge signal-primary">🚀 Bullish Momentum</span>
           </div>
           <h1 id="stock-company-name" class="company-title">Jyoti Structures Ltd.</h1>
-          <div id="stock-company-sector" class="company-meta">Power Transmission & Infrastructure • National Stock Exchange of India</div>
+          <div id="stock-company-sector" class="company-meta">Power Transmission & Infrastructure • National Stock
+            Exchange of India</div>
         </div>
 
         <div class="stock-pricing">
@@ -289,7 +283,8 @@
           <h2 class="section-heading">
             <span>⏱️ Milestone Benchmark Cards</span>
           </h2>
-          <span class="text-muted font-mono" style="font-size: 0.8rem; font-weight: 600;">Historical Reference Points & Daily RSI Comparison (INR)</span>
+          <span class="text-muted font-mono" style="font-size: 0.8rem; font-weight: 600;">Historical Reference Points &
+            Daily RSI Comparison (INR)</span>
         </div>
 
         <div id="milestone-cards-container" class="milestone-grid">
@@ -310,13 +305,8 @@
 
           <div class="table-actions">
             <!-- Quick Filter in Grid -->
-            <input 
-              type="text" 
-              id="grid-quick-filter" 
-              class="quick-filter-input" 
-              placeholder="Filter grid data..." 
-              title="Search across all columns in table"
-            >
+            <input type="text" id="grid-quick-filter" class="quick-filter-input" placeholder="Filter grid data..."
+              title="Search across all columns in table">
             <!-- Export to CSV -->
             <button type="button" id="export-csv-btn" class="btn-secondary" title="Export historical data to CSV">
               <span>📥 Export CSV</span>
@@ -336,11 +326,13 @@
   </main>
 
   <!-- AG-Grid Community JS Bundle (Local with CDN fallback) -->
-  <script src="/vendor/ag-grid/dist/ag-grid-community.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js';document.head.appendChild(s);"></script>
+  <script src="/vendor/ag-grid/dist/ag-grid-community.min.js"
+    onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js';document.head.appendChild(s);"></script>
 
   <!-- Modular Application Scripts -->
   <script src="/js/auth.js"></script>
   <script src="/js/grid.js"></script>
   <script src="/js/app.js"></script>
 </body>
+
 </html>
