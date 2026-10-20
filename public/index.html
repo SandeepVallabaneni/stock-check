@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlphaPulse India | NSE & BSE Stock Analytics & Technical Terminal</title>
+  <meta name="description" content="Institutional Indian Stock Analytics Terminal featuring NSE/BSE stocks, 6-month historical data, Wilder's RSI, Moving Averages, and AG-Grid data table.">
+  
+  <!-- Professional Google Typography (Plus Jakarta Sans & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- AG-Grid Community Stylesheets (Light Theme Quartz) -->
+  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-grid.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css';">
+  <link rel="stylesheet" href="/vendor/ag-grid/styles/ag-theme-quartz.min.css" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css';">
+  
+  <!-- Core Design System CSS (Professional Light Theme) -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- =========================================================================
+       VIEW 1: AUTHENTICATION / LOGIN SCREEN (Light Corporate Theme)
+       ========================================================================= -->
+  <section id="login-view" class="app-view">
+    <div class="login-wrapper">
+      <div class="auth-header">
+        <div class="brand-badge">
+          <span class="pulse-dot"></span>
+          AlphaPulse Terminal • Indian Markets (NSE/BSE)
+        </div>
+        <h1>AlphaPulse Terminal</h1>
+        <p>Institutional Equity Analytics & Technical RSI Terminal</p>
+      </div>
+
+      <div class="glass-card">
+        <!-- Auth Tabs (Sign In / Register) -->
+        <div class="auth-tabs">
+          <button id="tab-login-btn" class="auth-tab-btn active" type="button">Sign In</button>
+          <button id="tab-register-btn" class="auth-tab-btn" type="button">Create Account</button>
+        </div>
+
+        <!-- Alert Error Message Box -->
+        <div id="auth-error-box" class="alert-error">
+          <span id="auth-error-icon">⚠️</span>
+          <span id="auth-error-msg">Invalid credentials</span>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-username">Username or Corporate Email</label>
+            <div class="input-with-icon">
+              <span class="input-icon">👤</span>
+              <input 
+                type="text" 
+                id="login-username" 
+                class="form-input" 
+                placeholder="sandeep or sandeep@alphapulse.io" 
+                required 
+                autocomplete="username"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="input-with-icon">
+              <span class="input-icon">🔒</span>
+              <input 
+                type="password" 
+                id="login-password" 
+                class="form-input" 
+                placeholder="••••••••••••" 
+                required 
+                autocomplete="current-password"
+              >
+              <button type="button" id="toggle-login-pwd-btn" class="toggle-password-btn" aria-label="Toggle password visibility">
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row-actions">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember-me-checkbox" checked>
+              <span>Remember session</span>
+            </label>
+            <a href="#" id="forgot-password-link" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="btn-primary">
+            <span>Enter Terminal</span>
+            <span>→</span>
+          </button>
+        </form>
+
+        <!-- Registration Form (Hidden by default) -->
+        <form id="register-form" class="view-hidden">
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Full Name</label>
+            <div class="input-with-icon">
+              <span class="input-icon">👤</span>
+              <input type="text" id="reg-name" class="form-input" placeholder="Rohan Sharma" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Work Email</label>
+            <div class="input-with-icon">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="reg-email" class="form-input" placeholder="rohan@fund.in" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password</label>
+            <div class="input-with-icon">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="reg-password" class="form-input" placeholder="Min. 6 characters" required>
+            </div>
+          </div>
+
+          <button type="submit" id="register-submit-btn" class="btn-primary">
+            <span>Create Trader Account</span>
+            <span>→</span>
+          </button>
+        </form>
+
+        <!-- 1-Click Demo Accounts -->
+        <div class="demo-accounts-card">
+          <div class="demo-title">
+            <span>⚡ Instant Demo Access</span>
+          </div>
+          <div class="demo-buttons-grid">
+            <button type="button" id="demo-user-1-btn" class="demo-btn">
+              <strong>Sandeep Vallabaneni</strong>
+              <span>Equity Analyst (Default)</span>
+            </button>
+            <button type="button" id="demo-user-2-btn" class="demo-btn">
+              <strong>Sarah Chen</strong>
+              <span>Portfolio Manager</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VIEW 2: LANDING SCREEN / DASHBOARD (Light Theme)
+       ========================================================================= -->
+  <main id="dashboard-view" class="app-view view-hidden">
+    <!-- Top Sticky Navbar -->
+    <header class="top-navbar">
+      <div class="nav-container">
+        <div class="nav-left">
+          <a href="#" class="logo-brand">
+            <div class="logo-icon">▲</div>
+            <span class="logo-text">AlphaPulse India</span>
+          </a>
+          <div class="market-status-pill">
+            <span class="market-pulse-dot"></span>
+            <span>NSE & BSE • MUMBAI LIVE</span>
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <!-- User Profile & Logout -->
+          <div class="user-profile-badge">
+            <img id="nav-user-avatar" class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User avatar">
+            <div class="user-details">
+              <span id="nav-user-name" class="user-name">Sandeep Vallabaneni</span>
+              <span id="nav-user-role" class="user-role">Senior Equity Analyst</span>
+            </div>
+          </div>
+          <button id="logout-btn" class="btn-logout" type="button" title="Sign out of Terminal">
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-main">
+      
+      <!-- =======================================================================
+           FEATURE 3.1: SEARCH PANEL ON THE TOP WITH SEARCH BUTTON
+           ======================================================================= -->
+      <section id="search-panel" class="search-panel-wrapper">
+        <form id="stock-search-form" class="search-form-row">
+          <div class="search-input-box">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              id="stock-search-input" 
+              placeholder="Search Indian stocks (enter at least 3 letters e.g. JYO, CAN, JAY, SAN, HUD, PCJ, BOD)..." 
+              autocomplete="off"
+              spellcheck="false"
+              value="JYOTISTRUC"
+            >
+            <button type="button" id="clear-search-btn" class="clear-search-btn" title="Clear input">✕</button>
+            
+            <!-- Autocomplete Suggestion Dropdown -->
+            <div id="search-autocomplete-list" class="search-autocomplete-dropdown"></div>
+          </div>
+
+          <button type="submit" id="stock-search-btn" class="btn-search">
+            <span>Analyze Stock</span>
+            <span class="kbd-badge">⏎ Enter</span>
+          </button>
+        </form>
+
+        <!-- Quick Trending Indian Tickers -->
+        <div class="quick-tickers-row">
+          <span class="quick-label">Top Nifty 50:</span>
+          <button type="button" class="ticker-chip active" data-symbol="JYOTISTRUC">JYOTISTRUC</button>
+          <button type="button" class="ticker-chip" data-symbol="CANBK">Canara bank</button>
+          <button type="button" class="ticker-chip" data-symbol="JAYNECOIND">Jayaswal neco industries</button>
+          <button type="button" class="ticker-chip" data-symbol="SANDUMA">sanduma</button>
+          <button type="button" class="ticker-chip" data-symbol="HUDCO">hudco</button>
+          <button type="button" class="ticker-chip" data-symbol="PCJEWELLER">pcjewellers</button>
+          <button type="button" class="ticker-chip" data-symbol="BODALCHEM">bodalchem</button>
+        </div>
+      </section>
+
+      <!-- =======================================================================
+           FEATURE 3.2: STOCK HEADER DATA BANNER (INR ₹)
+           ======================================================================= -->
+      <section id="stock-header-panel" class="stock-header-card">
+        <div class="stock-identity">
+          <div class="stock-badge-row">
+            <span id="stock-symbol-badge" class="symbol-badge">JYOTISTRUC</span>
+            <span id="stock-exchange-badge" class="exchange-badge">NSE • INR (₹)</span>
+            <span id="stock-signal-badge" class="cell-signal-badge signal-primary">🚀 Bullish Momentum</span>
+          </div>
+          <h1 id="stock-company-name" class="company-title">Jyoti Structures Ltd.</h1>
+          <div id="stock-company-sector" class="company-meta">Power Transmission & Infrastructure • National Stock Exchange of India</div>
+        </div>
+
+        <div class="stock-pricing">
+          <div class="price-big-display">
+            <div class="flex items-center">
+              <span class="price-currency">₹</span>
+              <span id="stock-price-main" class="price-main">1,202.00</span>
+            </div>
+            <div id="stock-change-pill" class="change-pill change-positive">
+              <span id="stock-change-arrow">▲</span>
+              <span id="stock-change-text">+₹14.20 (+1.18%)</span>
+            </div>
+          </div>
+
+          <div class="key-stats-ribbon">
+            <div class="stat-item">
+              <span class="stat-label">Daily RSI (14)</span>
+              <span id="stat-current-rsi" class="stat-value">58.40</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">52W Range</span>
+              <span id="stat-52w-range" class="stat-value">₹1,150.00 - ₹1,610.00</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Market Cap</span>
+              <span id="stat-market-cap" class="stat-value">₹18.4 Lakh Cr</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">P/E Ratio</span>
+              <span id="stat-pe-ratio" class="stat-value">25.6x</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================================
+           FEATURE 3.3: 5 MILESTONE BENCHMARK CARDS
+           (Current Value, Last 1 Week, Last 2 Weeks, Last 3 Weeks, Last 1 Month)
+           Showing stock price and daily RSI at that value in INR (₹)
+           ======================================================================= -->
+      <section class="milestone-section">
+        <div class="section-title-row">
+          <h2 class="section-heading">
+            <span>⏱️ Milestone Benchmark Cards</span>
+          </h2>
+          <span class="text-muted font-mono" style="font-size: 0.8rem; font-weight: 600;">Historical Reference Points & Daily RSI Comparison (INR)</span>
+        </div>
+
+        <div id="milestone-cards-container" class="milestone-grid">
+          <!-- Dynamically populated with 5 cards: Current Value, 1 Week, 2 Weeks, 3 Weeks, 1 Month -->
+        </div>
+      </section>
+
+      <!-- =======================================================================
+           FEATURE 4: AG-GRID DATA TABLE (Past 6 Months - Light Theme)
+           Columns: Date, Closing Value (₹), Daily RSI, Change %, Change ₹, Open, High, Low, Volume, SMA 20, SMA 50, Signal
+           ======================================================================= -->
+      <section class="table-section-card">
+        <div class="table-toolbar">
+          <div class="table-title-area">
+            <h2>Institutional Data Grid (Past 6 Months)</h2>
+            <span id="grid-row-count-badge" class="row-count-badge">130 Trading Sessions</span>
+          </div>
+
+          <div class="table-actions">
+            <!-- Quick Filter in Grid -->
+            <input 
+              type="text" 
+              id="grid-quick-filter" 
+              class="quick-filter-input" 
+              placeholder="Filter grid data..." 
+              title="Search across all columns in table"
+            >
+            <!-- Export to CSV -->
+            <button type="button" id="export-csv-btn" class="btn-secondary" title="Export historical data to CSV">
+              <span>📥 Export CSV</span>
+            </button>
+            <!-- Reset Grid State -->
+            <button type="button" id="reset-grid-btn" class="btn-secondary" title="Reset table sort and filters">
+              <span>↺ Reset Filters</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AG-Grid Host Element (Quartz Light Theme) -->
+        <div id="stock-ag-grid" class="ag-theme-quartz grid-container"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- AG-Grid Community JS Bundle (Local with CDN fallback) -->
+  <script src="/vendor/ag-grid/dist/ag-grid-community.min.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js';document.head.appendChild(s);"></script>
+
+  <!-- Modular Application Scripts -->
+  <script src="/js/auth.js"></script>
+  <script src="/js/grid.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
