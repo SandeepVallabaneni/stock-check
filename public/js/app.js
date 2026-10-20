@@ -397,23 +397,34 @@ const App = {
           <!-- Daily RSI at this value -->
           <div class="rsi-card-block">
             <div class="rsi-label-row">
-              <span class="rsi-caption">
-                <span>Daily RSI (14)</span>
-              </span>
+              <span class="rsi-caption">Daily RSI (14-Period)</span>
               <span class="rsi-value-pill ${rsiPillClass}">
-                ${card.rsiBadge || 'Neutral'} • ${rsiNum.toFixed(2)}
+                ${rsiNum.toFixed(2)} • ${card.rsiBadge || 'Neutral'}
               </span>
             </div>
 
-            <!-- Visual RSI Meter (0 to 100) -->
-            <div class="rsi-bar-container" title="RSI Level: ${rsiNum.toFixed(2)} (0-100 scale)">
+            <!-- Visual RSI Meter (0 to 100) with clear reference ticks -->
+            <div class="rsi-bar-container" title="Current Daily RSI: ${rsiNum.toFixed(2)} (Scale 0 to 100)">
               <div class="rsi-bar-fill ${rsiClass}" style="width: ${Math.min(100, Math.max(0, rsiNum))}%;"></div>
+              <div class="rsi-tick rsi-tick-30" title="Oversold Threshold (30)"></div>
+              <div class="rsi-tick rsi-tick-50" title="Neutral Midpoint (50)"></div>
+              <div class="rsi-tick rsi-tick-70" title="Overbought Threshold (70)"></div>
             </div>
 
-            <div class="rsi-zones-hint">
-              <span>0 (Oversold &lt;30)</span>
-              <span>50</span>
-              <span>100 (Overbought &gt;70)</span>
+            <!-- Crystal Clear, High-Contrast RSI Zone Legend -->
+            <div class="rsi-legend-grid">
+              <div class="rsi-legend-box box-oversold" title="Oversold Zone: RSI &lt; 30 (Potential Value / Rebound)">
+                <span class="legend-badge">0 - 30</span>
+                <span class="legend-text">Oversold (&lt;30)</span>
+              </div>
+              <div class="rsi-legend-box box-mid" title="Neutral Zone: RSI ~ 50 (Balanced Trend)">
+                <span class="legend-badge">50</span>
+                <span class="legend-text">Midpoint</span>
+              </div>
+              <div class="rsi-legend-box box-overbought" title="Overbought Zone: RSI &gt; 70 (Overextended / Caution)">
+                <span class="legend-badge">70 - 100</span>
+                <span class="legend-text">Overbought (&gt;70)</span>
+              </div>
             </div>
           </div>
         </div>

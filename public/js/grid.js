@@ -194,8 +194,7 @@ const StockGrid = {
         }
       ],
 
-      // Show all rows without pagination or internal vertical scrolls
-      domLayout: 'autoHeight',
+      // Fixed 200px height with smooth internal scrolling as requested
       pagination: false,
       suppressPaginationPanel: true,
       rowSelection: 'single',
